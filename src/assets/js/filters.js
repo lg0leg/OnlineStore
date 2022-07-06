@@ -312,7 +312,7 @@ function createToyCard(num) {
 
   const year = document.createElement('p');
   year.classList.add('toy-year');
-  year.innerHTML = 'Год покупки: ' + data[num].year + ' год';
+  year.innerHTML = 'Год выпуска: ' + data[num].year + ' год';
   item.appendChild(year);
 
   const shape = document.createElement('p');
@@ -338,7 +338,7 @@ function createToyCard(num) {
   } else {
     yesno = 'нет';
   }
-  favorite.innerHTML = 'Любимая: ' + yesno;
+  favorite.innerHTML = 'Редкий товар: ' + yesno;
   item.appendChild(favorite);
 
   toyCards.appendChild(item);
