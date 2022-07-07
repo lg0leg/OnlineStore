@@ -12,14 +12,14 @@ const baseConfig = {
   mode: 'development',
   module: {
     rules: [
-      {
-        test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
-      },
       // {
       //   test: /\.css$/i,
-      //   use: ['style-loader', 'css-loader'],
+      //   use: [MiniCssExtractPlugin.loader, 'css-loader'],
       // },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
       {
         test: /\.ts$/i,
         use: 'ts-loader',
