@@ -834,6 +834,7 @@ html {
     display: flex;
     flex-wrap: wrap;
     /* gap: 20px; */
+    grid-gap: 30px;
     padding: 10px;
     /* background-color: rgba(255, 155, 155, 0.2); */
     overflow: visible;
