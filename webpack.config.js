@@ -52,9 +52,7 @@ const baseConfig = {
       patterns: [{ from: './src/assets' }],
     }),
     new EslingPlugin({ extensions: 'ts' }),
-    new MiniCssExtractPlugin({
-      filename: '[name].[contenthash].css',
-    }),
+    new MiniCssExtractPlugin(),
   ],
 };
 
