@@ -304,6 +304,8 @@ function createToyCard(num) {
   const img = document.createElement('img');
   img.classList.add('toy-image');
   img.src = `./toys/${num + 1}.png`;
+  img.width = 85;
+  img.height = 85;
   item.appendChild(img);
 
   const count = document.createElement('p');
