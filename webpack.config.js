@@ -13,14 +13,9 @@ const baseConfig = {
   module: {
     rules: [
       {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
-      },
-      {
-        test: /\.ts$/i,
+        test: /\.tsx?$/i,
         use: 'ts-loader',
         exclude: /node_modules/,
-        // test: /\.tsx?$/,
       },
       {
         test: /\.(?:ico|gif|png|jpg|jpeg|svg|webp)$/i,

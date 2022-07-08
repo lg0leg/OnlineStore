@@ -1,7 +1,7 @@
 {
   "description": "webpack",
   "repository": {},
-  "license": " ",
+  "license": "ISC",
   "main": "webpack.base.config.js",
   "scripts": {
     "start": "webpack serve --open-app-name 'chrome' --config ./webpack.config.js --env mode=dev",
