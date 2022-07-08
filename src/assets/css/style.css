@@ -740,14 +740,14 @@ html {
 
   .categories {
     display: grid;
-    grid-template-columns: 400px 300px;
+    grid-template-columns: 400px 280px;
     grid-template-areas:
       'g1 g9'
       'g2 g8'
       'g3 g6'
       'g4 g7'
       'g5 g7';
-    grid-gap: 0px 30px;
+    grid-gap: 0px 50px;
     overflow: hidden;
   }
 
@@ -831,11 +831,13 @@ html {
   .toy-cards {
     height: auto;
     min-height: 400px;
-    display: flex;
+    /* display: flex; */
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     flex-wrap: wrap;
-    /* gap: 20px; */
-    grid-gap: 30px;
-    padding: 10px;
+    gap: 20px;
+    grid-gap: 20px;
+    padding: 20px;
     /* background-color: rgba(255, 155, 155, 0.2); */
     overflow: visible;
   }
