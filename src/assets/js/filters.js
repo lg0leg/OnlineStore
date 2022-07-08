@@ -100,6 +100,8 @@ function createToyCard(num) {
   if (setElect.has(num)) {
     item.classList.add('toy-card-item-elect');
   }
+  item.classList.add('hidden-card');
+  setTimeout(() => item.classList.remove('hidden-card'), 10);
   item.addEventListener('click', () => {
     cardHandler(item, num);
   });
