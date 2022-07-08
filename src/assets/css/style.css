@@ -546,7 +546,7 @@ html {
   font-weight: normal;
   font-size: 16px;
   line-height: 12px;
-  transition: all 1s;
+  transition: transform 1s, opacity 1s;
 }
 
 .toy-card-item-elect {
@@ -570,7 +570,7 @@ html {
 }
 
 .hidden-card {
-  transform: scale(0.95);
+  transform: scale(0.97);
   opacity: 0.8;
 }
 
