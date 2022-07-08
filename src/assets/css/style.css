@@ -1,11 +1,3 @@
-@font-face {
-  font-family: 'Steppe';
-  src: url('../fonts/Steppe.woff2') format('woff2'), url('../fonts/Steppe.otf') format('opentype');
-  font-style: normal;
-  font-weight: normal;
-  text-rendering: optimizeLegibility;
-}
-
 html {
   box-sizing: border-box;
 }
