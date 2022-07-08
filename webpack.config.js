@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const EslingPlugin = require('eslint-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const baseConfig = {
   entry: path.resolve(__dirname, './src/index.js'),
@@ -11,6 +12,10 @@ const baseConfig = {
   mode: 'development',
   module: {
     rules: [
+      // {
+      //   test: /\.css$/i,
+      //   use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      // },
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
@@ -41,6 +46,10 @@ const baseConfig = {
   output: {
     filename: 'index.js',
     path: path.resolve(__dirname, './dist'),
+    assetModuleFilename: (pathData) => {
+      const filepath = path.dirname(pathData.filename).split('/').slice(1).join('/');
+      return `${filepath}/[name][ext]`;
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -52,6 +61,9 @@ const baseConfig = {
       patterns: [{ from: './src/assets' }],
     }),
     new EslingPlugin({ extensions: 'ts' }),
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css',
+    }),
   ],
 };
 

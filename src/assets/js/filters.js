@@ -1,4 +1,5 @@
 import data from './data.js';
+import noUiSlider from 'nouislider';
 
 const searchInput = document.querySelector('#search-input');
 const toyCounter = document.querySelector('#toy-counter');
@@ -35,7 +36,7 @@ const sliderYearCounterEnd = document.querySelector('#slider-year-counter-end');
 
 const colorItems = document.querySelector('.colors-cont');
 
-const noMatchAlert = document.querySelector('#no-match-alert');
+// const noMatchAlert = document.querySelector('#no-match-alert');
 
 const toyCards = document.querySelector('#toy-cards');
 
