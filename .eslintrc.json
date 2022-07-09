@@ -13,6 +13,7 @@
     "node": true
   },
   "rules": {
+    // "quotes": [2, "single", { "avoidEscape": true }],
     "no-debugger": "off",
     "no-console": 0,
     "class-methods-use-this": "off",
@@ -21,7 +22,9 @@
     "prettier/prettier": [
       "error",
       {
-        "endOfLine": "auto"
+        "endOfLine": "auto",
+        "singleQuote": true,
+        "useTabs": false
       }
     ]
   }
