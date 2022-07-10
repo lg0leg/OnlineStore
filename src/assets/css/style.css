@@ -324,18 +324,31 @@ html {
   font-weight: normal;
   font-size: 18px;
   line-height: 22px;
+
+  background-color: #192f2d;
+  color: #fff;
+  border: 0;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
 }
 
 .slider-copies-counter-start,
 .slider-copies-counter-end {
   padding-left: 30px;
-  padding-top: 12px;
+  padding-top: 5px;
 }
 
 .slider-year-counter-start,
 .slider-year-counter-end {
   padding-left: 16px;
-  padding-top: 12px;
+  padding-top: 5px;
 }
 
 .colors-cont {

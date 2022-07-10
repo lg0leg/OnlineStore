@@ -611,5 +611,3 @@ export const data: Array<toyItem> = [
     favorite: true,
   },
 ];
-
-// export default data;

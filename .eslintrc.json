@@ -13,12 +13,10 @@
     "node": true
   },
   "rules": {
-    // "quotes": [2, "single", { "avoidEscape": true }],
     "no-debugger": "off",
     "no-console": 0,
     "class-methods-use-this": "off",
-    // "@typescript-eslint/no-explicit-any": "error",
-    "@typescript-eslint/no-explicit-any": 2,
+    "@typescript-eslint/no-explicit-any": "error",
     "prettier/prettier": [
       "error",
       {

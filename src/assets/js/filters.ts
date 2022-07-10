@@ -1,5 +1,5 @@
 import { toyItem, data } from './data';
-import noUiSlider from 'nouislider';
+import * as noUiSlider from 'nouislider';
 
 const searchInput = document.querySelector('#search-input');
 const toyCounter = document.querySelector('#toy-counter');
@@ -18,10 +18,8 @@ const bigSizeForm = document.querySelector('#size-big');
 const middleSizeForm = document.querySelector('#size-middle');
 const smallSizeForm = document.querySelector('#size-small');
 const onlyFavoritesForm = document.querySelector('#favorites-checkbox');
-const sliderCopies = document.getElementById('slider-copies');
-const sliderYear = document.getElementById('slider-year');
-const sliderCopiesCont = document.querySelector('#slider-copies-cont');
-const sliderYearCont = document.querySelector('#slider-year-cont');
+const sliderCopies = document.getElementById('slider-copies') as noUiSlider.target;
+const sliderYear = document.getElementById('slider-year') as noUiSlider.target;
 const sliderCopiesCounterStart = document.querySelector('#slider-copies-counter-start');
 const sliderCopiesCounterEnd = document.querySelector('#slider-copies-counter-end');
 const sliderYearCounterStart = document.querySelector('#slider-year-counter-start');
@@ -29,6 +27,7 @@ const sliderYearCounterEnd = document.querySelector('#slider-year-counter-end');
 const colorItems = document.querySelector('.colors-cont');
 const toyCards = document.querySelector('#toy-cards');
 const resetSettings = document.querySelector('#reset-settings');
+const setElect = new Set();
 // const noMatchAlert = document.querySelector('#no-match-alert');
 
 let renderNumArr: number[] = [];
@@ -54,8 +53,6 @@ let bigSizeChecked = 'no';
 let middleSizeChecked = 'no';
 let smallSizeChecked = 'no';
 let onlyFavoritesChecked = 'no';
-const setElect = new Set();
-// let setElect = new Set();
 
 /*Первый рендер всех карточек*/
 
@@ -100,9 +97,7 @@ function createToyCard(num: number) {
     <p class="toy-color">Цвет игрушки: ${data[num].color}</p>
     <p class="toy-size">Размер игрушки: ${data[num].size}</p>
     <p class="toy-favorite">Редкий товар: ${data[num].favorite == true ? 'да' : 'нет'}</p>`;
-  if (toyCards) {
-    toyCards.appendChild(item);
-  }
+  toyCards && toyCards.appendChild(item);
   if (setElect.has(num)) {
     item.classList.add('toy-card-item-elect');
   }
@@ -130,17 +125,13 @@ function cardHandler(item: HTMLDivElement, id: number) {
       }, 1500);
     }
   }
-  if (toyCounter) {
-    toyCounter.innerHTML = `${setElect.size}`;
-  }
+  toyCounter && (toyCounter.innerHTML = `${setElect.size}`);
 }
 
 /*Заполняет контейнер карточками с номерами из массива*/
 
 function renderCards(arrNum: Array<number>) {
-  if (toyCards) {
-    toyCards.innerHTML = '';
-  }
+  toyCards && (toyCards.innerHTML = '');
   for (const num of arrNum) {
     createToyCard(num);
   }
@@ -308,12 +299,12 @@ function clearFilters() {
   snowflakeForm?.classList.remove('toy-form-item-active');
   toyForm?.classList.remove('toy-form-item-active');
 
-  // if (sliderCopies) {
-  //   sliderCopies.noUiSlider.set([1, 12]);
-  // }
-  // if (sliderYear) {
-  //   sliderYear.noUiSlider.set([1940, 2020]);
-  // }
+  if (sliderCopies && sliderCopies.noUiSlider) {
+    sliderCopies.noUiSlider.set([1, 12]);
+  }
+  if (sliderYear && sliderYear.noUiSlider) {
+    sliderYear.noUiSlider.set([1940, 2020]);
+  }
   sliderCopiesCounterStart && (sliderCopiesCounterStart.innerHTML = '1');
   sliderCopiesCounterEnd && (sliderCopiesCounterEnd.innerHTML = '12');
   sliderYearCounterStart && (sliderYearCounterStart.innerHTML = '1940');
@@ -405,23 +396,25 @@ toyForm?.addEventListener('click', () => {
 
 /*Счетчики слайдера*/
 
-// sliderCopiesCont?.addEventListener('click', () => {
-//   const a = sliderCopies?.noUiSlider.get();
-//   sliderCopiesCounterStart && (sliderCopiesCounterStart.innerHTML = `${Math.round(a[0])}`);
-//   sliderCopiesCounterEnd && (sliderCopiesCounterEnd.innerHTML = `${Math.round(a[1])}`);
-//   copiesCounterStart = Math.round(a[0]);
-//   copiesCounterEnd = Math.round(a[1]);
-//   allFilters(data);
-// });
+if (sliderCopies.noUiSlider) {
+  sliderCopies.noUiSlider.on('update', function (values, handle) {
+    const inputs = [sliderCopiesCounterStart as HTMLInputElement, sliderCopiesCounterEnd as HTMLInputElement];
+    copiesCounterStart = Math.round(+values[0]);
+    copiesCounterEnd = Math.round(+values[1]);
+    inputs[handle].value = `${Math.round(+values[handle])}`;
+    allFilters(data);
+  });
+}
 
-// sliderYearCont?.addEventListener('click', () => {
-//   const a = sliderYear?.noUiSlider.get();
-//   sliderYearCounterStart && (sliderYearCounterStart.innerHTML = `${Math.round(a[0])}`);
-//   sliderYearCounterEnd && (sliderYearCounterEnd.innerHTML = `${Math.round(a[1])}`);
-//   yearCounterStart = Math.round(a[0]);
-//   yearCounterEnd = Math.round(a[1]);
-//   allFilters(data);
-// });
+if (sliderYear.noUiSlider) {
+  sliderYear.noUiSlider.on('update', function (values, handle) {
+    const inputs = [sliderYearCounterStart as HTMLInputElement, sliderYearCounterEnd as HTMLInputElement];
+    yearCounterStart = Math.round(+values[0]);
+    yearCounterEnd = Math.round(+values[1]);
+    inputs[handle].value = `${Math.round(+values[handle])}`;
+    allFilters(data);
+  });
+}
 
 /*Чекбоксы цветов*/
 
@@ -515,11 +508,5 @@ onlyFavoritesForm?.addEventListener('click', () => {
 resetSettings?.addEventListener('click', () => {
   clearFilters();
 });
-
-//Вывести все карточки*/
-
-// for (let index = 0; index < 60; index++) {
-//   createToyCard(index);
-// }
 
 export default setElect;
