@@ -7,4 +7,4 @@ import './assets/css/style.css';
 
 /*js*/
 
-import './assets/js/filters.js';
+import './assets/js/filters.ts';

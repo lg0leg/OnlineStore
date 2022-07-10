@@ -1,4 +1,15 @@
-const data = [
+export interface toyItem {
+  num: string;
+  name: string;
+  count: string;
+  year: string;
+  shape: string;
+  color: string;
+  size: string;
+  favorite: boolean;
+}
+
+export const data: Array<toyItem> = [
   {
     num: '1',
     name: 'Большой шар с рисунком',
@@ -601,4 +612,4 @@ const data = [
   },
 ];
 
-export default data;
+// export default data;

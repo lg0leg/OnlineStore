@@ -1,4 +1,4 @@
-import data from './data.js';
+import { toyItem, data } from './data';
 import noUiSlider from 'nouislider';
 
 const searchInput = document.querySelector('#search-input');
@@ -18,8 +18,8 @@ const bigSizeForm = document.querySelector('#size-big');
 const middleSizeForm = document.querySelector('#size-middle');
 const smallSizeForm = document.querySelector('#size-small');
 const onlyFavoritesForm = document.querySelector('#favorites-checkbox');
-var sliderCopies = document.getElementById('slider-copies');
-var sliderYear = document.getElementById('slider-year');
+const sliderCopies = document.getElementById('slider-copies');
+const sliderYear = document.getElementById('slider-year');
 const sliderCopiesCont = document.querySelector('#slider-copies-cont');
 const sliderYearCont = document.querySelector('#slider-year-cont');
 const sliderCopiesCounterStart = document.querySelector('#slider-copies-counter-start');
@@ -31,11 +31,11 @@ const toyCards = document.querySelector('#toy-cards');
 const resetSettings = document.querySelector('#reset-settings');
 // const noMatchAlert = document.querySelector('#no-match-alert');
 
-let renderNumArr = [];
-let checkedFormsArr = [];
-let checkedColorsArr = [];
-let checkedSizeArr = [];
-let checkedFavoritesArr = [];
+let renderNumArr: number[] = [];
+let checkedFormsArr: string[] = [];
+let checkedColorsArr: string[] = [];
+let checkedSizeArr: string[] = [];
+let checkedFavoritesArr: boolean[] = [];
 let bellChecked = 'no';
 let ballChecked = 'no';
 let pineChecked = 'no';
@@ -54,40 +54,44 @@ let bigSizeChecked = 'no';
 let middleSizeChecked = 'no';
 let smallSizeChecked = 'no';
 let onlyFavoritesChecked = 'no';
-let setElect = new Set();
+const setElect = new Set();
+// let setElect = new Set();
 
 /*Первый рендер всех карточек*/
 
 allFilters(data);
 
 /*Слайдеры*/
+if (sliderCopies) {
+  noUiSlider.create(sliderCopies, {
+    start: [1, 12],
+    step: 1,
+    connect: true,
+    range: {
+      min: [1],
+      max: [12],
+    },
+  });
+}
 
-noUiSlider.create(sliderCopies, {
-  start: [1, 12],
-  step: 1,
-  connect: true,
-  range: {
-    min: [1],
-    max: [12],
-  },
-});
-
-noUiSlider.create(sliderYear, {
-  start: [1940, 2020],
-  step: 10,
-  connect: true,
-  range: {
-    min: [1940],
-    max: [2020],
-  },
-});
+if (sliderYear) {
+  noUiSlider.create(sliderYear, {
+    start: [1940, 2020],
+    step: 10,
+    connect: true,
+    range: {
+      min: [1940],
+      max: [2020],
+    },
+  });
+}
 
 /*Создает и заполняет карточку*/
 
-function createToyCard(num) {
-  const item = document.createElement('div');
+function createToyCard(num: number) {
+  const item: HTMLDivElement = document.createElement('div');
   item.classList.add('toy-card-item');
-  item.setAttribute('data-card-id', num);
+  item.setAttribute('data-card-id', `${num}`);
   item.innerHTML = `<p class="toy-name">${data[num].name}</p>
     <img class="toy-image" src="./toys/${num + 1}.png" width="85" height="85">
     <p class="toy-count">Количество: ${data[num].count}</p>
@@ -96,7 +100,9 @@ function createToyCard(num) {
     <p class="toy-color">Цвет игрушки: ${data[num].color}</p>
     <p class="toy-size">Размер игрушки: ${data[num].size}</p>
     <p class="toy-favorite">Редкий товар: ${data[num].favorite == true ? 'да' : 'нет'}</p>`;
-  toyCards.appendChild(item);
+  if (toyCards) {
+    toyCards.appendChild(item);
+  }
   if (setElect.has(num)) {
     item.classList.add('toy-card-item-elect');
   }
@@ -109,7 +115,7 @@ function createToyCard(num) {
 
 /*Изменение стиля по клику + счетчик*/
 
-function cardHandler(item, id) {
+function cardHandler(item: HTMLDivElement, id: number) {
   if (setElect.has(id)) {
     item.classList.remove('toy-card-item-elect');
     setElect.delete(id);
@@ -118,34 +124,38 @@ function cardHandler(item, id) {
       item.classList.add('toy-card-item-elect');
       setElect.add(id);
     } else {
-      toyCounter.classList.add('toy-counter-alert');
+      toyCounter?.classList.add('toy-counter-alert');
       setTimeout(() => {
-        toyCounter.classList.remove('toy-counter-alert');
+        toyCounter?.classList.remove('toy-counter-alert');
       }, 1500);
     }
   }
-  toyCounter.innerHTML = setElect.size;
+  if (toyCounter) {
+    toyCounter.innerHTML = `${setElect.size}`;
+  }
 }
 
 /*Заполняет контейнер карточками с номерами из массива*/
 
-function renderCards(arrNum) {
-  toyCards.innerHTML = '';
-  for (let num of arrNum) {
+function renderCards(arrNum: Array<number>) {
+  if (toyCards) {
+    toyCards.innerHTML = '';
+  }
+  for (const num of arrNum) {
     createToyCard(num);
   }
 
-  if (arrNum.length == '0') {
+  if (arrNum.length == 0) {
     const alert = document.createElement('div');
     alert.classList.add('no-match-alert');
     alert.innerHTML = 'Увы, таких игрушек в коллекции нет&#128532;';
-    toyCards.appendChild(alert);
+    toyCards?.appendChild(alert);
   }
 }
 
 /*Создает массив из выбранных форм игрушек*/
 
-function checkFilterForms(bellChecked, ballChecked, pineChecked, snowflakeChecked, toyChecked) {
+function checkFilterForms(bellChecked: string, ballChecked: string, pineChecked: string, snowflakeChecked: string, toyChecked: string) {
   if (bellChecked == 'yes') {
     checkedFormsArr.push('колокольчик');
   }
@@ -168,7 +178,7 @@ function checkFilterForms(bellChecked, ballChecked, pineChecked, snowflakeChecke
 
 /*Создает массив из выбранных цветов игрушек*/
 
-function checkFilterColors(whiteChecked, yellowChecked, redChecked, blueChecked, greenChecked) {
+function checkFilterColors(whiteChecked: string, yellowChecked: string, redChecked: string, blueChecked: string, greenChecked: string) {
   if (whiteChecked == 'yes') {
     checkedColorsArr.push('белый');
   }
@@ -191,7 +201,7 @@ function checkFilterColors(whiteChecked, yellowChecked, redChecked, blueChecked,
 
 /*Создает массив из выбранных размеров игрушек*/
 
-function checkFilterSizes(bigSizeChecked, middleSizeChecked, smallSizeChecked) {
+function checkFilterSizes(bigSizeChecked: string, middleSizeChecked: string, smallSizeChecked: string) {
   if (bigSizeChecked == 'yes') {
     checkedSizeArr.push('большой');
   }
@@ -206,7 +216,7 @@ function checkFilterSizes(bigSizeChecked, middleSizeChecked, smallSizeChecked) {
   }
 }
 
-function checkFilterFavorites(onlyFavoritesChecked) {
+function checkFilterFavorites(onlyFavoritesChecked: string) {
   if (onlyFavoritesChecked == 'yes') {
     checkedFavoritesArr = [true];
   } else {
@@ -216,15 +226,15 @@ function checkFilterFavorites(onlyFavoritesChecked) {
 
 /*Оставляет только карточки, соответствующие фильтрам*/
 
-function allFilters(data) {
+function allFilters(data: Array<toyItem>) {
   let copyData = data.slice();
 
   checkedFormsArr = [];
   checkFilterForms(bellChecked, ballChecked, pineChecked, snowflakeChecked, toyChecked);
   copyData = copyData.filter((item) => checkedFormsArr.includes(item.shape));
 
-  copyData = copyData.filter((item) => item.count >= copiesCounterStart && item.count <= copiesCounterEnd);
-  copyData = copyData.filter((item) => item.year >= yearCounterStart && item.year <= yearCounterEnd);
+  copyData = copyData.filter((item) => +item.count >= copiesCounterStart && +item.count <= copiesCounterEnd);
+  copyData = copyData.filter((item) => +item.year >= yearCounterStart && +item.year <= yearCounterEnd);
 
   checkedColorsArr = [];
   checkFilterColors(whiteChecked, yellowChecked, redChecked, blueChecked, greenChecked);
@@ -238,30 +248,30 @@ function allFilters(data) {
   checkFilterFavorites(onlyFavoritesChecked);
   copyData = copyData.filter((item) => checkedFavoritesArr.includes(item.favorite));
 
-  if (searchInput.value != '') {
-    copyData = copyData.filter((item) => item.name.toLowerCase().includes(searchInput.value.toLowerCase()));
+  if ((searchInput as HTMLInputElement).value != '') {
+    copyData = copyData.filter((item) => item.name.toLowerCase().includes((searchInput as HTMLInputElement).value.toLowerCase()));
   }
 
-  if (sortForm.value == 'sort-by-name-down') {
+  if ((sortForm as HTMLInputElement).value == 'sort-by-name-down') {
     copyData.sort(function (a, b) {
       if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
       if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
       return 0;
     });
-  } else if (sortForm.value == 'sort-by-name-up') {
+  } else if ((sortForm as HTMLInputElement).value == 'sort-by-name-up') {
     copyData.sort(function (a, b) {
       if (b.name.toLowerCase() < a.name.toLowerCase()) return -1;
       if (b.name.toLowerCase() > a.name.toLowerCase()) return 1;
       return 0;
     });
-  } else if (sortForm.value == 'sort-by-year-up') {
-    copyData.sort((a, b) => a.year - b.year);
-  } else if (sortForm.value == 'sort-by-year-down') {
-    copyData.sort((a, b) => b.year - a.year);
+  } else if ((sortForm as HTMLInputElement).value == 'sort-by-year-up') {
+    copyData.sort((a, b) => +a.year - +b.year);
+  } else if ((sortForm as HTMLInputElement).value == 'sort-by-year-down') {
+    copyData.sort((a, b) => +b.year - +a.year);
   }
 
   renderNumArr = [];
-  copyData.forEach((item) => renderNumArr.push(Number(item.num - 1)));
+  copyData.forEach((item) => renderNumArr.push(+item.num - 1));
   renderCards(renderNumArr);
 }
 
@@ -292,32 +302,38 @@ function clearFilters() {
   smallSizeChecked = 'no';
   onlyFavoritesChecked = 'no';
 
-  bellForm.classList.remove('toy-form-item-active');
-  ballForm.classList.remove('toy-form-item-active');
-  pineForm.classList.remove('toy-form-item-active');
-  snowflakeForm.classList.remove('toy-form-item-active');
-  toyForm.classList.remove('toy-form-item-active');
+  bellForm?.classList.remove('toy-form-item-active');
+  ballForm?.classList.remove('toy-form-item-active');
+  pineForm?.classList.remove('toy-form-item-active');
+  snowflakeForm?.classList.remove('toy-form-item-active');
+  toyForm?.classList.remove('toy-form-item-active');
 
-  sliderCopies.noUiSlider.set([1, 12]);
-  sliderYear.noUiSlider.set([1940, 2020]);
-  sliderCopiesCounterStart.innerHTML = 1;
-  sliderCopiesCounterEnd.innerHTML = 12;
-  sliderYearCounterStart.innerHTML = 1940;
-  sliderYearCounterEnd.innerHTML = 2020;
+  // if (sliderCopies) {
+  //   sliderCopies.noUiSlider.set([1, 12]);
+  // }
+  // if (sliderYear) {
+  //   sliderYear.noUiSlider.set([1940, 2020]);
+  // }
+  sliderCopiesCounterStart && (sliderCopiesCounterStart.innerHTML = '1');
+  sliderCopiesCounterEnd && (sliderCopiesCounterEnd.innerHTML = '12');
+  sliderYearCounterStart && (sliderYearCounterStart.innerHTML = '1940');
+  sliderYearCounterEnd && (sliderYearCounterEnd.innerHTML = '2020');
 
-  whiteColorForm.classList.remove('checkbox');
-  yellowColorForm.classList.remove('checkbox');
-  redColorForm.classList.remove('checkbox');
-  blueColorForm.classList.remove('checkbox');
-  greenColorForm.classList.remove('checkbox');
+  whiteColorForm?.classList.remove('checkbox');
+  yellowColorForm?.classList.remove('checkbox');
+  redColorForm?.classList.remove('checkbox');
+  blueColorForm?.classList.remove('checkbox');
+  greenColorForm?.classList.remove('checkbox');
 
-  bigSizeForm.classList.remove('checkbox-alt');
-  middleSizeForm.classList.remove('checkbox-alt');
-  smallSizeForm.classList.remove('checkbox-alt');
+  bigSizeForm?.classList.remove('checkbox-alt');
+  middleSizeForm?.classList.remove('checkbox-alt');
+  smallSizeForm?.classList.remove('checkbox-alt');
 
-  onlyFavoritesForm.classList.remove('checkbox-alt');
+  onlyFavoritesForm?.classList.remove('checkbox-alt');
 
-  toyCards.innerHTML = '';
+  if (toyCards) {
+    toyCards.innerHTML = '';
+  }
   allFilters(data);
 }
 
@@ -325,19 +341,19 @@ function clearFilters() {
 
 /*Окно поиска*/
 
-searchInput.addEventListener('keyup', () => {
+searchInput?.addEventListener('keyup', () => {
   allFilters(data);
 });
 
 /*Список сортировок*/
 
-sortForm.addEventListener('change', () => {
+sortForm?.addEventListener('change', () => {
   allFilters(data);
 });
 
 /*Иконки игрушек*/
 
-bellForm.addEventListener('click', () => {
+bellForm?.addEventListener('click', () => {
   bellForm.classList.toggle('toy-form-item-active');
   if (bellChecked == 'no') {
     bellChecked = 'yes';
@@ -347,7 +363,7 @@ bellForm.addEventListener('click', () => {
   allFilters(data);
 });
 
-ballForm.addEventListener('click', () => {
+ballForm?.addEventListener('click', () => {
   ballForm.classList.toggle('toy-form-item-active');
   if (ballChecked == 'no') {
     ballChecked = 'yes';
@@ -357,7 +373,7 @@ ballForm.addEventListener('click', () => {
   allFilters(data);
 });
 
-pineForm.addEventListener('click', () => {
+pineForm?.addEventListener('click', () => {
   pineForm.classList.toggle('toy-form-item-active');
   if (pineChecked == 'no') {
     pineChecked = 'yes';
@@ -367,7 +383,7 @@ pineForm.addEventListener('click', () => {
   allFilters(data);
 });
 
-snowflakeForm.addEventListener('click', () => {
+snowflakeForm?.addEventListener('click', () => {
   snowflakeForm.classList.toggle('toy-form-item-active');
   if (snowflakeChecked == 'no') {
     snowflakeChecked = 'yes';
@@ -377,7 +393,7 @@ snowflakeForm.addEventListener('click', () => {
   allFilters(data);
 });
 
-toyForm.addEventListener('click', () => {
+toyForm?.addEventListener('click', () => {
   toyForm.classList.toggle('toy-form-item-active');
   if (toyChecked == 'no') {
     toyChecked = 'yes';
@@ -389,32 +405,32 @@ toyForm.addEventListener('click', () => {
 
 /*Счетчики слайдера*/
 
-sliderCopiesCont.addEventListener('click', () => {
-  let a = sliderCopies.noUiSlider.get();
-  sliderCopiesCounterStart.innerHTML = Math.round(a[0]);
-  sliderCopiesCounterEnd.innerHTML = Math.round(a[1]);
-  copiesCounterStart = Math.round(a[0]);
-  copiesCounterEnd = Math.round(a[1]);
-  allFilters(data);
-});
+// sliderCopiesCont?.addEventListener('click', () => {
+//   const a = sliderCopies?.noUiSlider.get();
+//   sliderCopiesCounterStart && (sliderCopiesCounterStart.innerHTML = `${Math.round(a[0])}`);
+//   sliderCopiesCounterEnd && (sliderCopiesCounterEnd.innerHTML = `${Math.round(a[1])}`);
+//   copiesCounterStart = Math.round(a[0]);
+//   copiesCounterEnd = Math.round(a[1]);
+//   allFilters(data);
+// });
 
-sliderYearCont.addEventListener('click', () => {
-  let a = sliderYear.noUiSlider.get();
-  sliderYearCounterStart.innerHTML = Math.round(a[0]);
-  sliderYearCounterEnd.innerHTML = Math.round(a[1]);
-  yearCounterStart = Math.round(a[0]);
-  yearCounterEnd = Math.round(a[1]);
-  allFilters(data);
-});
+// sliderYearCont?.addEventListener('click', () => {
+//   const a = sliderYear?.noUiSlider.get();
+//   sliderYearCounterStart && (sliderYearCounterStart.innerHTML = `${Math.round(a[0])}`);
+//   sliderYearCounterEnd && (sliderYearCounterEnd.innerHTML = `${Math.round(a[1])}`);
+//   yearCounterStart = Math.round(a[0]);
+//   yearCounterEnd = Math.round(a[1]);
+//   allFilters(data);
+// });
 
 /*Чекбоксы цветов*/
 
-colorItems.addEventListener('click', (event) => {
-  event.target.classList.toggle('checkbox');
+colorItems?.addEventListener('click', (event) => {
+  (event.target as HTMLElement).classList.toggle('checkbox');
   allFilters(data);
 });
 
-whiteColorForm.addEventListener('click', () => {
+whiteColorForm?.addEventListener('click', () => {
   if (whiteChecked == 'no') {
     whiteChecked = 'yes';
   } else {
@@ -422,7 +438,7 @@ whiteColorForm.addEventListener('click', () => {
   }
 });
 
-yellowColorForm.addEventListener('click', () => {
+yellowColorForm?.addEventListener('click', () => {
   if (yellowChecked == 'no') {
     yellowChecked = 'yes';
   } else {
@@ -430,7 +446,7 @@ yellowColorForm.addEventListener('click', () => {
   }
 });
 
-redColorForm.addEventListener('click', () => {
+redColorForm?.addEventListener('click', () => {
   if (redChecked == 'no') {
     redChecked = 'yes';
   } else {
@@ -438,7 +454,7 @@ redColorForm.addEventListener('click', () => {
   }
 });
 
-blueColorForm.addEventListener('click', () => {
+blueColorForm?.addEventListener('click', () => {
   if (blueChecked == 'no') {
     blueChecked = 'yes';
   } else {
@@ -446,7 +462,7 @@ blueColorForm.addEventListener('click', () => {
   }
 });
 
-greenColorForm.addEventListener('click', () => {
+greenColorForm?.addEventListener('click', () => {
   if (greenChecked == 'no') {
     greenChecked = 'yes';
   } else {
@@ -456,7 +472,7 @@ greenColorForm.addEventListener('click', () => {
 
 /*Чекбоксы размеров и избранного, кнопка сброса настроек*/
 
-bigSizeForm.addEventListener('click', () => {
+bigSizeForm?.addEventListener('click', () => {
   bigSizeForm.classList.toggle('checkbox-alt');
   if (bigSizeChecked == 'no') {
     bigSizeChecked = 'yes';
@@ -466,7 +482,7 @@ bigSizeForm.addEventListener('click', () => {
   allFilters(data);
 });
 
-middleSizeForm.addEventListener('click', () => {
+middleSizeForm?.addEventListener('click', () => {
   middleSizeForm.classList.toggle('checkbox-alt');
   if (middleSizeChecked == 'no') {
     middleSizeChecked = 'yes';
@@ -476,7 +492,7 @@ middleSizeForm.addEventListener('click', () => {
   allFilters(data);
 });
 
-smallSizeForm.addEventListener('click', () => {
+smallSizeForm?.addEventListener('click', () => {
   smallSizeForm.classList.toggle('checkbox-alt');
   if (smallSizeChecked == 'no') {
     smallSizeChecked = 'yes';
@@ -486,7 +502,7 @@ smallSizeForm.addEventListener('click', () => {
   allFilters(data);
 });
 
-onlyFavoritesForm.addEventListener('click', () => {
+onlyFavoritesForm?.addEventListener('click', () => {
   onlyFavoritesForm.classList.toggle('checkbox-alt');
   if (onlyFavoritesChecked == 'no') {
     onlyFavoritesChecked = 'yes';
@@ -496,7 +512,7 @@ onlyFavoritesForm.addEventListener('click', () => {
   allFilters(data);
 });
 
-resetSettings.addEventListener('click', () => {
+resetSettings?.addEventListener('click', () => {
   clearFilters();
 });
 
