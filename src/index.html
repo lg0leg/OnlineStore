@@ -31,8 +31,8 @@
               <select class="sort-select" name="sort" id="sort">
                 <option class="sort-option" value="sort-by-name-down">По названию от А до Я</option>
                 <option class="sort-option" value="sort-by-name-up">По названию от Я до А</option>
-                <option class="sort-option" value="sort-by-year-up">По году приобретения &#8593;</option>
-                <option class="sort-option" value="sort-by-year-down">По году приобретения &#8595;</option>
+                <option class="sort-option" value="sort-by-year-up">По году выпуска &#8593;</option>
+                <option class="sort-option" value="sort-by-year-down">По году выпуска &#8595;</option>
               </select>
             </div>
             <div class="categories">
@@ -63,17 +63,17 @@
               <div class="number-of-copies grid-4">
                 <h3 class="h3-toys">Количество экземпляров в наличии</h3>
                 <div class="slider-copies-cont" id="slider-copies-cont">
-                  <div class="slider-copies-counter-start" id="slider-copies-counter-start">1</div>
+                  <input type="number" class="slider-copies-counter-start" id="slider-copies-counter-start" value="1" disabled />
                   <div class="slider-copies" id="slider-copies"></div>
-                  <div class="slider-copies-counter-end" id="slider-copies-counter-end">12</div>
+                  <input type="number" class="slider-copies-counter-end" id="slider-copies-counter-end" value="12" disabled />
                 </div>
               </div>
               <div class="year-of-purchase grid-5">
                 <h3 class="h3-toys">Год выпуска</h3>
                 <div class="slider-year-cont" id="slider-year-cont">
-                  <div class="slider-year-counter-start" id="slider-year-counter-start">1940</div>
+                  <input type="number" class="slider-year-counter-start" id="slider-year-counter-start" value="1940" disabled />
                   <div class="slider-year" id="slider-year"></div>
-                  <div class="slider-year-counter-end" id="slider-year-counter-end">2020</div>
+                  <input type="number" class="slider-year-counter-end" id="slider-year-counter-end" value="2020" disabled />
                 </div>
               </div>
               <div class="toy-color grid-6">
