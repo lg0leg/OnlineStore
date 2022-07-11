@@ -156,7 +156,7 @@ html {
   z-index: 10;
 }
 
-.toy-basket:hover {
+.basket-button:hover {
   cursor: pointer;
   opacity: 0.8;
   transition: all 0.3s;

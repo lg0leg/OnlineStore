@@ -509,4 +509,4 @@ resetSettings?.addEventListener('click', () => {
   clearFilters();
 });
 
-export default setElect;
+export { setElect };
