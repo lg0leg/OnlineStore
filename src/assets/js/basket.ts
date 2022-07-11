@@ -5,6 +5,7 @@ const basketButton = document.querySelector('#basket-button');
 const overlay = document.querySelector('#overlay');
 const basketCont = document.querySelector('#basket-cont');
 const closeBasketButton = document.querySelector('#close-basket-button');
+const userItemsCont = document.querySelector('#user-selected-items');
 const copyData = data.slice();
 
 function openBasketModal() {
@@ -14,9 +15,10 @@ function openBasketModal() {
     basketCont?.classList.remove('fade');
   }, 10);
 
+  userItemsCont && (userItemsCont.innerHTML = '');
   for (const value of setElect) {
     if (typeof value == 'number') {
-      basketCont?.append(`игрушка №${value} - доступно ${copyData[value].count} штук; `);
+      userItemsCont?.append(`игрушка №${value} - доступно ${copyData[value].count} штук; `);
     }
   }
 }
