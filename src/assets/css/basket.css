@@ -126,8 +126,10 @@
 }
 
 .user-selected-items {
+  padding-top: 1px;
   background-color: #fff;
   min-height: 420px;
+  height: 420px;
   overflow-y: auto;
 }
 
@@ -135,12 +137,18 @@
   margin-top: 10px;
   padding-top: 5px;
   padding-bottom: 10px;
+
   display: grid;
   grid-template-columns: 1fr 4fr 2fr 1fr 1fr 1fr 2fr;
   justify-items: center;
   align-items: center;
   height: 55px;
   border-bottom: 1px solid #f5f7fa;
+}
+
+.basket-item-img {
+  position: relative;
+  bottom: 5px;
 }
 
 .basket-item-title {

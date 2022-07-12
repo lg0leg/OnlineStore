@@ -151,7 +151,7 @@
           Введите имя: <sub style="color: red">*</sub>
           <input class="user-info-input" type="text" name="name" required />
         </label>
-        <fieldset class="user-info-order-option">
+        <fieldset class="user-info-order-option" id="order-type-cont">
           <legend class="user-info-legend">Выберите вариант доставки:</legend>
           <div>
             <input type="radio" id="courier" name="order-type" value="courier" />
@@ -177,37 +177,7 @@
         <div>Количество</div>
         <div>Стоимость</div>
       </div>
-      <div class="user-selected-items" id="user-selected-items">
-        <div class="basket-item">
-          <img class="basket-item-img" src="./toys/11.png" alt="picture" width="40" height="40" />
-          <div class="basket-item-title">Зелёный шар с рисунком hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</div>
-          <div class="basket-item-in-stock">10</div>
-          <button class="basket-item-button" type="button">➖</button>
-          <div class="basket-item-count">1</div>
-          <button class="basket-item-button" type="button">➕</button>
-          <div class="basket-item-price">49.90$</div>
-        </div>
-
-        <div class="basket-item">
-          <img class="basket-item-img" src="./toys/2.png" alt="picture" width="40" height="40" />
-          <div class="basket-item-title">Зелёный шар с рисунком hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</div>
-          <div class="basket-item-in-stock">10</div>
-          <button class="basket-item-button" type="button">➖</button>
-          <div class="basket-item-count">1</div>
-          <button class="basket-item-button" type="button">➕</button>
-          <div class="basket-item-price">49.90$</div>
-        </div>
-
-        <div class="basket-item">
-          <img class="basket-item-img" src="./toys/5.png" alt="picture" width="40" height="40" />
-          <div class="basket-item-title">Зелёный шар с рисунком hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</div>
-          <div class="basket-item-in-stock">10</div>
-          <button class="basket-item-button" type="button">➖</button>
-          <div class="basket-item-count">1</div>
-          <button class="basket-item-button" type="button">➕</button>
-          <div class="basket-item-price">49.90$</div>
-        </div>
-      </div>
+      <div class="user-selected-items" id="user-selected-items"></div>
       <button class="close-basket-button" id="close-basket-button">&#10060;</button>
     </div>
     <!-- </div> -->
