@@ -13,7 +13,7 @@ const copyData = data.slice();
 function setTotalPrice() {
   let forOrder;
   (document.querySelector('input[name="order-type"]:checked') as HTMLInputElement).value === 'self' ? (forOrder = 0) : (forOrder = 5);
-  orderPrice && ((orderPrice as HTMLInputElement).value = `${forOrder}`);
+  orderPrice && ((orderPrice as HTMLInputElement).value = `${forOrder} $`);
 }
 setTotalPrice();
 
