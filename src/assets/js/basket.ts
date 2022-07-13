@@ -9,64 +9,8 @@ const userItemsCont = document.querySelector('#user-selected-items');
 const orderTypeCont = document.querySelector('#order-type-cont');
 const orderPrice = document.querySelector('#order-price');
 const copyData = data.slice();
-
-function setTotalPrice() {
-  let forOrder;
-  (document.querySelector('input[name="order-type"]:checked') as HTMLInputElement).value === 'self' ? (forOrder = 0) : (forOrder = 5);
-  orderPrice && ((orderPrice as HTMLInputElement).value = `${forOrder} $`);
-}
-setTotalPrice();
-
-function createBasketItem(num: number) {
-  const count = 1;
-  const total = 4.99 * count;
-  const div = document.createElement('div');
-  div.classList.add('basket-item');
-  div.innerHTML = `
-  <img class="basket-item-img" src="./toys/${num + 1}.png" alt="picture" width="40" height="40" />
-  <div class="basket-item-title">${copyData[num].name}</div>
-  <div class="basket-item-in-stock">${copyData[num].count}</div>
-  <button class="basket-item-button" type="button">➖</button>
-  <div class="basket-item-count">${count}</div>
-  <button class="basket-item-button" type="button">➕</button>
-  <div class="basket-item-price">${total}$</div>
-  `;
-  return div;
-}
-
-// function createBasketItem(num: number) {
-//   let count = 1;
-//   let total = 4.99 * count;
-
-//   const div = document.createElement('div');
-//   div.classList.add('basket-item');
-//   div.innerHTML = `
-//   <img class="basket-item-img" src="./toys/${num + 1}.png" alt="picture" width="40" height="40" />
-//   <div class="basket-item-title">${copyData[num].name}</div>
-//   <div class="basket-item-in-stock">${copyData[num].count}</div>
-//   <button class="basket-item-button" type="button" onclick="${pressMinus()}">➖</button>
-//   <div class="basket-item-count">${count}</div>
-//   <button class="basket-item-button" type="button" onclick="console.log('плюс')">➕</button>
-//   <div class="basket-item-price">${total}$</div>
-//   `;
-//   function pressMinus() {
-//     console.log('минус');
-//     if (count > 0) {
-//       count -= 1;
-//       total = 4.99 * count;
-//     }
-//   }
-//   return div;
-// }
-
-// class createBasketItemClass {
-//   constructor(num: number) {
-//     this.num = num;
-//   }
-//   num: number;
-//   div: HTMLDivElement = document.createElement('div');
-//   this.div.innerHTML = `<p>num</p>`
-// }
+const basketItemsPrice: { [index: string]: number } = {};
+const TOY_PRICE = 4.99;
 
 function openBasketModal() {
   overlay?.classList.remove('hide');
@@ -75,21 +19,95 @@ function openBasketModal() {
     basketCont?.classList.remove('fade');
   }, 10);
 
-  userItemsCont && (userItemsCont.innerHTML = '');
-  for (const value of setElect) {
-    if (typeof value == 'number') {
-      // userItemsCont?.append(`игрушка №${value} - доступно ${copyData[value].count} штук; `);
-      // createBasketItem(value);
-      userItemsCont?.appendChild(createBasketItem(value));
-    }
-  }
+  setDefaultPriceList();
+  setTotalPrice();
+  fillBasket();
 }
 
 function closeBasketModal() {
   overlay?.classList.add('hide');
   basketCont?.classList.add('fade');
   basketCont?.classList.add('hide');
+
+  clearPriceList();
 }
+
+function setDefaultPriceList() {
+  for (const value of setElect) {
+    if (typeof value == 'number') {
+      basketItemsPrice[value] = TOY_PRICE;
+    }
+  }
+}
+
+function clearPriceList() {
+  for (const el of Object.keys(basketItemsPrice)) {
+    delete basketItemsPrice[el];
+  }
+}
+
+function setTotalPrice() {
+  let forOrder;
+  let products = 0;
+  (document.querySelector('input[name="order-type"]:checked') as HTMLInputElement).value === 'self' ? (forOrder = 0) : (forOrder = 5);
+  for (const el of Object.values(basketItemsPrice)) {
+    products += el;
+  }
+  orderPrice && ((orderPrice as HTMLInputElement).value = `${(forOrder + products).toFixed(2)} $`);
+}
+
+function fillBasket() {
+  userItemsCont && (userItemsCont.innerHTML = '');
+  for (const value of setElect) {
+    if (typeof value == 'number') {
+      userItemsCont?.appendChild(createBasketItem(value));
+    }
+  }
+}
+
+function createBasketItem(num: number) {
+  let count = 1;
+  let total = Math.round(TOY_PRICE * 100 * count) / 100;
+
+  const div = document.createElement('div');
+  div.classList.add('basket-item');
+  div.innerHTML = `
+  <img class="basket-item-img" src="./toys/${num + 1}.png" alt="picture" width="40" height="40" />
+  <div class="basket-item-title">${copyData[num].name}</div>
+  <div class="basket-item-in-stock">${copyData[num].count}</div>
+  <button class="basket-item-button basket-minus-button" type="button">➖</button>
+  <div class="basket-item-count">${count}</div>
+  <button class="basket-item-button basket-plus-button" type="button">➕</button>
+  <div class="basket-item-price">${total} $</div>
+  `;
+
+  div.querySelector('.basket-minus-button')?.addEventListener('click', pressMinus);
+  div.querySelector('.basket-plus-button')?.addEventListener('click', pressPlus);
+  function pressMinus() {
+    if (count > 0) {
+      count -= 1;
+      total = Math.round(TOY_PRICE * 100 * count) / 100;
+      basketItemsPrice[`${num}`] = total;
+      (div.querySelector('.basket-item-count') as HTMLElement).innerHTML = `${count}`;
+      (div.querySelector('.basket-item-price') as HTMLElement).innerHTML = `${total} $`;
+    }
+    setTotalPrice();
+  }
+  function pressPlus() {
+    if (count < +copyData[num].count) {
+      count += 1;
+      total = Math.round(TOY_PRICE * 100 * count) / 100;
+      basketItemsPrice[`${num}`] = total;
+      (div.querySelector('.basket-item-count') as HTMLElement).innerHTML = `${count}`;
+      (div.querySelector('.basket-item-price') as HTMLElement).innerHTML = `${total} $`;
+    }
+    setTotalPrice();
+  }
+
+  return div;
+}
+
+/*обработчики*/
 
 orderTypeCont?.addEventListener('click', () => {
   setTotalPrice();
@@ -106,7 +124,3 @@ overlay?.addEventListener('click', () => {
 closeBasketButton?.addEventListener('click', () => {
   closeBasketModal();
 });
-
-// basketCont?.addEventListener('click', () => {
-//   console.log('basketCont');
-// });
