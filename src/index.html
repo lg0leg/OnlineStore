@@ -16,7 +16,7 @@
           <input type="search" class="search-input" id="search-input" placeholder="Какую игрушку хотите найти?" autofocus />
           <div class="toy-icon">
             <span class="toy-counter" id="toy-counter">0</span>
-            <img class="toy-basket" src="./icons/basket1.png" alt="basket" width="40" height="40" />
+            <img class="basket-button" id="basket-button" src="./icons/basket1.png" alt="basket" width="40" height="40" />
           </div>
         </div>
       </div>
@@ -40,23 +40,23 @@
               <h3 class="h3-toys grid-2">Форма</h3>
               <div class="toy-forms grid-3">
                 <div class="toy-form-item" id="bell-form">
-                  <img src="./shapeToy/bell.png" alt="Колокольчик" />
+                  <img src="./shapeToy/bell.png" alt="Колокольчик" width="42" height="42" />
                   <p class="toy-form-text">Колокольчик</p>
                 </div>
                 <div class="toy-form-item" id="ball-form">
-                  <img src="./shapeToy/ball.png" alt="Шар" />
+                  <img src="./shapeToy/ball.png" alt="Шар" width="42" height="42" />
                   <p class="toy-form-text">Шар</p>
                 </div>
                 <div class="toy-form-item" id="pine-form">
-                  <img src="./shapeToy/pine.png" alt="Шишка" />
+                  <img src="./shapeToy/pine.png" alt="Шишка" width="42" height="42" />
                   <p class="toy-form-text">Шишка</p>
                 </div>
                 <div class="toy-form-item" id="snowflake-form">
-                  <img src="./shapeToy/snowflake.png" alt="Снежинка" />
+                  <img src="./shapeToy/snowflake.png" alt="Снежинка" width="42" height="42" />
                   <p class="toy-form-text">Снежинка</p>
                 </div>
                 <div class="toy-form-item" id="toy-form">
-                  <img src="./shapeToy/toy.png" alt="Фигурка" />
+                  <img src="./shapeToy/toy.png" alt="Фигурка" width="42" height="42" />
                   <p class="toy-form-text">Фигурка</p>
                 </div>
               </div>
@@ -126,10 +126,60 @@
         </div>
         <div class="rsschool-logo">
           <a class="rs-school-link" href="https://rs.school/js/" target="_blank">
-            <img class="footer-img" src="./svg/rss.svg" alt="rs logo" height="30" />
+            <img class="footer-img" src="./svg/rss.svg" alt="rs logo" width="81" height="30" />
           </a>
         </div>
       </div>
     </footer>
+
+    <div class="overlay hide" id="overlay"></div>
+
+    <div class="basket-cont hide fade" id="basket-cont">
+      <form class="user-info" action="#">
+        <label class="user-info-label" for="phone"
+          >Введите номер телефона:
+          <input class="user-info-input" type="tel" id="phone" name="phone" placeholder="+375-xx-xxx-xx-xx" />
+        </label>
+        <label class="user-info-label" for="email"
+          >Введите почту: <sub style="color: red">*</sub>
+          <input class="user-info-input" type="email" id="email" placeholder="example@gmail.com" size="30" required />
+        </label>
+        <label class="user-info-label" for="address">
+          Введите адрес:
+          <input class="user-info-input" type="text" name="address" />
+        </label>
+        <label class="user-info-label" for="name">
+          Введите имя: <sub style="color: red">*</sub>
+          <input class="user-info-input" type="text" name="name" required />
+        </label>
+        <fieldset class="user-info-order-option" id="order-type-cont">
+          <legend class="user-info-legend">Выберите вариант доставки:</legend>
+          <div>
+            <input type="radio" id="courier" name="order-type" value="courier" />
+            <label class="user-info-label-1" for="courier">Курьером (5$)</label>
+          </div>
+          <div>
+            <input type="radio" id="self" name="order-type" value="self" checked />
+            <label class="user-info-label-1" for="self">Самовывоз (бесплатно)</label>
+          </div>
+        </fieldset>
+        <div class="order-cont">
+          <label class="user-info-label-2" for="order-price">
+            Итого:
+            <input class="order-price" type="text" name="order-price" id="order-price" value="0" disabled />
+          </label>
+          <button class="order-submit" type="submit">Оформить заказ</button>
+        </div>
+      </form>
+      <hr class="hr" />
+      <div class="basket-item-desc">
+        <div>Наименование</div>
+        <div>Доступно</div>
+        <div>Количество</div>
+        <div>Стоимость</div>
+      </div>
+      <div class="user-selected-items" id="user-selected-items"></div>
+      <button class="close-basket-button" id="close-basket-button">&#10060;</button>
+    </div>
   </body>
 </html>
