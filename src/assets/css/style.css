@@ -15,7 +15,6 @@ html {
   min-height: 100vh;
   display: grid;
   grid-template-rows: 70px 1fr 50px;
-  /* grid-template-rows: 70px auto 50px; */
 }
 
 .container {
@@ -31,14 +30,12 @@ html {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* background: blueviolet; */
 }
 
 .header-title {
   margin-left: 10px;
   margin-top: 5px;
   color: #ffc107;
-  /* color: rgb(246, 62, 62); */
   font-size: 40px;
 }
 
@@ -55,13 +52,11 @@ html {
 .github-link:hover {
   cursor: pointer;
   color: rgba(31, 112, 127, 1);
-  /* transition: 0.5s; */
 }
 
 .github-link:active {
   cursor: pointer;
   color: rgba(31, 112, 127, 0.7);
-  /* transition: 0.5s; */
 }
 
 .active-tab::after {
@@ -76,8 +71,6 @@ html {
 
 .tree-logo:hover,
 .footer-img:hover {
-  /* filter: invert(44%) sepia(55%) saturate(551%) hue-rotate(141deg)
-    brightness(95%) contrast(89%); */
   filter: invert(44%) sepia(71%) saturate(407%) hue-rotate(141deg) brightness(93%) contrast(96%);
 }
 
@@ -127,11 +120,6 @@ html {
   backdrop-filter: blur(31px);
   color: #fff;
   transition: background 1s;
-
-  /* background-image: url('../icons/basket1.png');
-  background-size: 40px 40px; */
-  /* background-position: left -8px; */
-  /* background-repeat: no-repeat; */
 }
 
 .toy-counter-alert {
@@ -172,16 +160,13 @@ html {
 
 .t-container {
   height: calc(100vh - 120px);
-  /* display: flex; */
   display: grid;
   grid-template-columns: 480px 1120px;
 }
 
 .filters {
-  /* width: 30%; */
   width: 100%;
   height: 100%;
-  /* background-color: rgba(155, 155, 255, 0.2); */
 }
 
 .sort-filter {
@@ -224,7 +209,6 @@ html {
   font-size: 12px;
   line-height: 14px;
   color: #ffffff;
-  /* border: 1px solid rgba(36, 197, 219, 0.26); */
 }
 
 .sort-option {
@@ -293,7 +277,6 @@ html {
   border-radius: 50%;
   top: -4px;
   right: -8px;
-  /* border: 1px solid rgba(36, 197, 219, 0.26); */
 }
 
 .slider-copies,
@@ -365,7 +348,6 @@ input[type='number'] {
   width: 24px;
   height: 24px;
   border-radius: 5px;
-  /* background-color: #aaa; */
   cursor: pointer;
 }
 
@@ -415,8 +397,6 @@ input[type='number'] {
   display: flex;
   height: 40px;
   align-items: center;
-  /* align-content: center; */
-  /* justify-content: center; */
 }
 
 .size-checkbox,
@@ -453,7 +433,6 @@ input[type='number'] {
   font-weight: normal;
   font-size: 16px;
   line-height: 19px;
-  /* text-align: center; */
 }
 
 .favorites {
@@ -473,16 +452,11 @@ input[type='number'] {
 }
 
 .setting-buttons {
-  /* height: 70px; */
   padding-left: 130px;
   padding-top: 30px;
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
 }
 
-.reset-settings,
-.save-spruce-button {
+.reset-settings {
   width: 172px;
   height: 30px;
   padding-top: 5px;
@@ -500,14 +474,12 @@ input[type='number'] {
   color: #ffffff;
 }
 
-.reset-settings:hover,
-.save-spruce-button:hover {
+.reset-settings:hover {
   opacity: 0.8;
   color: rgba(36, 197, 219, 1);
 }
 
-.reset-settings:active,
-.save-spruce-button:active {
+.reset-settings:active {
   opacity: 0.6;
 }
 
@@ -515,7 +487,6 @@ input[type='number'] {
 
 .toy-cards {
   position: relative;
-  /* width: 70%; */
   width: 100%;
   height: 100%;
 
@@ -523,7 +494,6 @@ input[type='number'] {
   flex-wrap: wrap;
   gap: 30px;
   padding: 30px;
-  /* background-color: rgba(255, 155, 155, 0.2); */
   overflow: auto;
 }
 
@@ -542,7 +512,6 @@ input[type='number'] {
 }
 
 .toy-card-item {
-  /* margin-left: 30px; */
   width: 222px;
   height: 342px;
   padding: 16px;
@@ -633,7 +602,6 @@ input[type='number'] {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* background: blueviolet; */
 }
 
 .footer-info {
@@ -701,7 +669,6 @@ input[type='number'] {
 
   .filters {
     padding-left: 20px;
-    /* background-color: rgba(155, 155, 255, 0.2); */
   }
 
   .toy-cards {
@@ -713,7 +680,6 @@ input[type='number'] {
   .body {
     min-height: 100vh;
     display: grid;
-    /* grid-template-rows: 70px 1fr 50px; */
     grid-template-rows: 140px auto 50px;
   }
 
@@ -744,7 +710,6 @@ input[type='number'] {
 
   .filters {
     padding-left: 20px;
-    /* background-color: rgba(155, 155, 255, 0.2); */
   }
 
   .sort-filter {
@@ -806,7 +771,7 @@ input[type='number'] {
   }
 
   .slider-year-counter-end {
-    padding-left: 20px;
+    padding-left: 12px;
   }
 
   .size-cont {
@@ -845,14 +810,12 @@ input[type='number'] {
   .toy-cards {
     height: auto;
     min-height: 400px;
-    /* display: flex; */
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     flex-wrap: wrap;
     gap: 20px;
     grid-gap: 20px;
     padding: 20px;
-    /* background-color: rgba(255, 155, 155, 0.2); */
     overflow: visible;
   }
 }
