@@ -2,7 +2,6 @@
   position: fixed;
   width: 100%;
   height: 100%;
-  /* height: 100vh; */
   background-color: rgba(0, 0, 0, 0.9);
   z-index: 10;
 }
@@ -35,18 +34,15 @@
   display: grid;
   grid-template-columns: 300px 300px;
   gap: 20px;
-  font-family: 'Steppe';
 }
 
 .user-info-label,
 .user-info-legend {
   font-size: 18px;
-  font-family: 'Steppe';
 }
 
 .user-info-label-1 {
   font-size: 17px;
-  font-family: 'Steppe';
 }
 
 .user-info-input {
@@ -71,7 +67,6 @@
 
 .user-info-label-2 {
   font-size: 20px;
-  font-family: 'Steppe';
 }
 
 .order-price {
@@ -172,13 +167,12 @@
   opacity: 0;
 }
 
-/* @media (max-width: 768px) {
+@media (max-width: 768px) {
   .basket-cont {
     position: absolute;
+    padding: 20px;
     top: 20px;
-    left: 10px;
+    left: 25px;
     transform: translate(0px, 0px);
-    width: 350px;
-    min-height: 500px;
   }
-} */
+}
