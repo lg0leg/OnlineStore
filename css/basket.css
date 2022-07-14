@@ -25,8 +25,8 @@
 
 .close-basket-button {
   position: absolute;
-  right: 0;
-  top: 0;
+  right: 3px;
+  top: 5px;
   border: 0;
   background: none;
 }
@@ -89,6 +89,7 @@
   font-size: large;
   border-radius: 5px;
   background: inherit;
+  box-shadow: 2px 2px 8px 0px rgba(34, 60, 80, 0.2);
 }
 
 .order-submit:hover {

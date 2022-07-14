@@ -72,7 +72,10 @@ function createBasketItem(num: number) {
   const div = document.createElement('div');
   div.classList.add('basket-item');
   div.innerHTML = `
-  <img class="basket-item-img" src="./toys/${num + 1}.png" alt="picture" width="40" height="40" />
+  <picture>
+    <source srcset="./toys/webp/${num + 1}.webp" type="image/webp">
+    <img class="basket-item-img" src="./toys/${num + 1}.png" alt="toy preview" width="40" height="40"/>
+  </picture>
   <div class="basket-item-title">${copyData[num].name}</div>
   <div class="basket-item-in-stock">${copyData[num].count}</div>
   <button class="basket-item-button basket-minus-button" type="button">➖</button>
