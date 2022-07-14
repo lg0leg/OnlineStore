@@ -90,7 +90,10 @@ function createToyCard(num: number) {
   item.classList.add('toy-card-item');
   item.setAttribute('data-card-id', `${num}`);
   item.innerHTML = `<p class="toy-name">${data[num].name}</p>
-    <img class="toy-image" src="./toys/${num + 1}.png" width="85" height="85">
+    <picture>
+      <source srcset="./toys/webp/${num + 1}.webp" type="image/webp">
+      <img class="toy-image" src="./toys/${num + 1}.png" alt="toy image" width="85" height="85"/>
+    </picture>
     <p class="toy-count">Количество: ${data[num].count}</p>
     <p class="toy-year">Год выпуска: ${data[num].year} год</p>
     <p class="toy-shape">Форма игрушки: ${data[num].shape}</p>
