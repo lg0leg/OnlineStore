@@ -3,6 +3,7 @@
   src: url('../fonts/Steppe.woff2') format('woff2'), url('../fonts/Steppe.otf') format('opentype');
   font-style: normal;
   font-weight: normal;
+  font-display: swap;
   text-rendering: optimizeLegibility;
 }
 
@@ -11,5 +12,6 @@
   src: url('../fonts/NeuchaRegular.woff') format('woff'), url('../fonts/NeuchaRegular.ttf') format('truetype');
   font-style: normal;
   font-weight: 400;
+  font-display: swap;
   text-rendering: optimizeLegibility;
 }
